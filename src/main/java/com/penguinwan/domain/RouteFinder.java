@@ -13,10 +13,10 @@ public class RouteFinder {
             boolean hasDeparture = false;
             boolean hasArrival = false;
             for (Station station : route.getStations()) {
-                if (station.getId() == departure.getId()) {
+                if (station.isSameStationWith(departure)) {
                     hasDeparture = true;
                 }
-                if (station.getId() == arrival.getId()) {
+                if (station.isSameStationWith(arrival)) {
                     hasArrival = true;
                 }
             }

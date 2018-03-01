@@ -84,6 +84,28 @@ class RouteFinderTest {
         assert routeFinder.isConnected(Station.of(6), Station.of(3)) == false
     }
 
+    @Test
+    void "return false when departure station is not specified"() {
+        IDataProvider dataProvider = dataProviderOf([
+                [1, 1, 2, 3]
+        ])
+
+        routeFinder = new RouteFinder(dataProvider)
+
+        assert routeFinder.isConnected(null, Station.of(3)) == false
+    }
+
+    @Test
+    void "return false when arrival station is not specified"() {
+        IDataProvider dataProvider = dataProviderOf([
+                [1, 1, 2, 3]
+        ])
+
+        routeFinder = new RouteFinder(dataProvider)
+
+        assert routeFinder.isConnected(Station.of(1), null) == false
+    }
+
     IDataProvider dataProviderOf(List<List<int[]>> data) {
         return {
             List<Route> routes = new ArrayList<>()
