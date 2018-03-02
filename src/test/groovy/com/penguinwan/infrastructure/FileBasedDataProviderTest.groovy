@@ -38,6 +38,13 @@ class FileBasedDataProviderTest {
         new FileBasedDataProvider(Paths.get(invalidFilePath));
     }
 
+    @Test(expected = InvalidFormatException.class)
+    void "error when number of routes is non-numeric"() {
+        URL url = FileBasedDataProviderTest.class.getResource('invalid-number-of-routes')
+        Path path = Paths.get(url.toURI())
+        new FileBasedDataProvider(path)
+    }
+
     @Test
     void "able to parse well-format string"() {
         Route route = FileBasedDataProvider.LineParser.parse('10 1 2 3')

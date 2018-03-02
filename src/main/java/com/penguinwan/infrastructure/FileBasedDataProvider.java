@@ -26,9 +26,19 @@ public class FileBasedDataProvider implements IDataProvider {
             throw new InvalidFileException("File path: " + filePath.toString());
         }
 
+        //TODO try with resource
+        //TODO close reader
         try {
             BufferedReader reader = Files.newBufferedReader(filePath);
-            String line;
+            String line = reader.readLine();
+
+            if (NumericChecker.isNonNumeric(line)) {
+                throw new InvalidFormatException(
+                        String.format(
+                                "Expected: First line to be the number of routes; Result: [%s]",
+                                line));
+            }
+
             while ((line = reader.readLine()) != null) {
                 Route route = LineParser.parse(line);
                 routes.add(route);
@@ -43,7 +53,25 @@ public class FileBasedDataProvider implements IDataProvider {
         return routes;
     }
 
-    static class LineParser {
+    private static class NumericChecker {
+        static boolean isNonNumeric(String s) {
+            return isNonNumeric(s, 10);
+        }
+
+        private static boolean isNonNumeric(String s, int radix) {
+            if (s.isEmpty()) return true;
+            for (int i = 0; i < s.length(); i++) {
+                if (i == 0 && s.charAt(i) == '-') {
+                    if (s.length() == 1) return true;
+                    else continue;
+                }
+                if (Character.digit(s.charAt(i), radix) < 0) return true;
+            }
+            return false;
+        }
+    }
+
+    private static class LineParser {
         public static final String SEPARATOR = " ";
 
         public static Route parse(String line) throws InvalidFormatException {
@@ -57,7 +85,7 @@ public class FileBasedDataProvider implements IDataProvider {
                                 line));
             }
 
-            Optional<String> nonNumeric = Arrays.stream(tokens).filter(LineParser::nonNumeric).findFirst();
+            Optional<String> nonNumeric = Arrays.stream(tokens).filter(NumericChecker::isNonNumeric).findFirst();
             if (nonNumeric.isPresent()) {
                 throw new InvalidFormatException(
                         String.format(
@@ -73,20 +101,6 @@ public class FileBasedDataProvider implements IDataProvider {
             return new Route(Integer.parseInt(tokens[0]), stations);
         }
 
-        private static boolean nonNumeric(String s) {
-            return nonNumeric(s, 10);
-        }
 
-        private static boolean nonNumeric(String s, int radix) {
-            if (s.isEmpty()) return true;
-            for (int i = 0; i < s.length(); i++) {
-                if (i == 0 && s.charAt(i) == '-') {
-                    if (s.length() == 1) return true;
-                    else continue;
-                }
-                if (Character.digit(s.charAt(i), radix) < 0) return true;
-            }
-            return false;
-        }
     }
 }
