@@ -2,8 +2,8 @@ package com.penguinwan.domain
 
 import org.junit.Test
 
-class RouteFinderTest {
-    RouteFinder routeFinder;
+class SimpleRouteFinderTest {
+    SimpleRouteFinder routeFinder;
 
     @Test
     void "able to find first result"() {
@@ -11,7 +11,7 @@ class RouteFinderTest {
                 [1, 1, 2, 3]
         ])
 
-        routeFinder = new RouteFinder(dataProvider)
+        routeFinder = new SimpleRouteFinder(dataProvider)
 
         assert routeFinder.isConnected(Station.of(1), Station.of(3)) == true
     }
@@ -24,7 +24,7 @@ class RouteFinderTest {
                 [3, 7, 8, 9]
         ])
 
-        routeFinder = new RouteFinder(dataProvider)
+        routeFinder = new SimpleRouteFinder(dataProvider)
 
         assert routeFinder.isConnected(Station.of(7), Station.of(9)) == true
     }
@@ -35,7 +35,7 @@ class RouteFinderTest {
                 [1, 1, 2, 3, 4, 5, 6, 7, 8]
         ])
 
-        routeFinder = new RouteFinder(dataProvider)
+        routeFinder = new SimpleRouteFinder(dataProvider)
 
         assert routeFinder.isConnected(Station.of(6), Station.of(7)) == true
     }
@@ -46,7 +46,7 @@ class RouteFinderTest {
                 [1, 1, 2, 3, 4, 5, 6, 7, 8]
         ])
 
-        routeFinder = new RouteFinder(dataProvider)
+        routeFinder = new SimpleRouteFinder(dataProvider)
 
         assert routeFinder.isConnected(Station.of(8), Station.of(4)) == true
     }
@@ -57,7 +57,7 @@ class RouteFinderTest {
                 [1, 1, 2, 3]
         ])
 
-        routeFinder = new RouteFinder(dataProvider)
+        routeFinder = new SimpleRouteFinder(dataProvider)
 
         assert routeFinder.isConnected(Station.of(4), Station.of(6)) == false
     }
@@ -68,7 +68,7 @@ class RouteFinderTest {
                 [1, 1, 2, 3]
         ])
 
-        routeFinder = new RouteFinder(dataProvider)
+        routeFinder = new SimpleRouteFinder(dataProvider)
 
         assert routeFinder.isConnected(Station.of(1), Station.of(6)) == false
     }
@@ -79,7 +79,7 @@ class RouteFinderTest {
                 [1, 1, 2, 3]
         ])
 
-        routeFinder = new RouteFinder(dataProvider)
+        routeFinder = new SimpleRouteFinder(dataProvider)
 
         assert routeFinder.isConnected(Station.of(6), Station.of(3)) == false
     }
@@ -90,7 +90,7 @@ class RouteFinderTest {
                 [1, 1, 2, 3]
         ])
 
-        routeFinder = new RouteFinder(dataProvider)
+        routeFinder = new SimpleRouteFinder(dataProvider)
 
         assert routeFinder.isConnected(null, Station.of(3)) == false
     }
@@ -101,7 +101,7 @@ class RouteFinderTest {
                 [1, 1, 2, 3]
         ])
 
-        routeFinder = new RouteFinder(dataProvider)
+        routeFinder = new SimpleRouteFinder(dataProvider)
 
         assert routeFinder.isConnected(Station.of(1), null) == false
     }

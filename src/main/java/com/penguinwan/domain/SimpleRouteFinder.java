@@ -1,12 +1,13 @@
 package com.penguinwan.domain;
 
-public class RouteFinder {
+public class SimpleRouteFinder implements IRouteFinder {
     private IDataProvider dataProvider;
 
-    public RouteFinder(IDataProvider dataProvider) {
+    public SimpleRouteFinder(IDataProvider dataProvider) {
         this.dataProvider = dataProvider;
     }
 
+    @Override
     public boolean isConnected(Station departure, Station arrival) {
         Iterable<Route> routes = dataProvider.iterator();
         for (Route route : routes) {
