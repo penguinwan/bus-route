@@ -7,7 +7,12 @@ public class Route {
     private int id;
     private List<Station> stations = new ArrayList<Station>();
 
-    public Route(List<Station> stations) {
+    public Route(int id) {
+        this.id = id;
+    }
+
+    public Route(int id, List<Station> stations) {
+        this(id);
         this.stations.addAll(stations);
     }
 

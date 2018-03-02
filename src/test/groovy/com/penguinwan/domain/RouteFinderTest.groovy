@@ -116,7 +116,7 @@ class RouteFinderTest {
                         stations.add(Station.of(stationNumber))
                     }
                 }
-                routes.add(new Route(stations))
+                routes.add(new Route(routeLine[0], stations))
             }
             return routes
         } as IDataProvider
