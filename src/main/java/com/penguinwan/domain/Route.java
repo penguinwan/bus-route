@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Route {
     private int id;
-    private List<Station> stations = new ArrayList<Station>();
+    private List<Station> stations = new ArrayList<>();
 
     public Route(int id) {
         this.id = id;
