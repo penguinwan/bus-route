@@ -26,10 +26,9 @@ public class FileBasedDataProvider implements IDataProvider {
             throw new InvalidFileException("File path: " + filePath.toString());
         }
 
-        //TODO try with resource
-        //TODO close reader
-        try {
-            BufferedReader reader = Files.newBufferedReader(filePath);
+        try (
+                BufferedReader reader = Files.newBufferedReader(filePath)
+        ) {
             String line = reader.readLine();
 
             if (NumericChecker.isNonNumeric(line)) {
