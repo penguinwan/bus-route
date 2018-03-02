@@ -13,4 +13,19 @@ public class Station {
         if (station == null) return false;
         return this.id == station.id;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Station station = (Station) o;
+
+        return id == station.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
 }
