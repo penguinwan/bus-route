@@ -1,5 +1,8 @@
 package com.penguinwan.domain;
 
+import java.util.function.Predicate;
+import java.util.stream.StreamSupport;
+
 public class SimpleRouteFinder implements IRouteFinder {
     private IDataProvider dataProvider;
 
@@ -9,22 +12,19 @@ public class SimpleRouteFinder implements IRouteFinder {
 
     @Override
     public boolean isConnected(Station departure, Station arrival) {
-        Iterable<Route> routes = dataProvider.iterator();
-        for (Route route : routes) {
-            boolean hasDeparture = false;
-            boolean hasArrival = false;
-            for (Station station : route.getStations()) {
-                if (station.isSameStationWith(departure)) {
-                    hasDeparture = true;
-                }
-                if (station.isSameStationWith(arrival)) {
-                    hasArrival = true;
-                }
-            }
-            if (hasDeparture && hasArrival) {
-                return true;
-            }
-        }
-        return false;
+        Predicate<Station> isDepartureStation = (station) -> station.isSameStationWith(departure);
+        Predicate<Station> isArrivalStation = (station) -> station.isSameStationWith(arrival);
+
+        Predicate<Route> hasDepartureAndArrival =
+                (route) -> route.
+                        getStations().
+                        stream().
+                        filter(isDepartureStation.or(isArrivalStation)).
+                        count() == 2;
+
+        return StreamSupport.stream(dataProvider.iterator().spliterator(), false).
+                filter(hasDepartureAndArrival).
+                count() > 0;
+
     }
 }
