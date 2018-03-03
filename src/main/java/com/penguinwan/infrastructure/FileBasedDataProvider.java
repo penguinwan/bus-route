@@ -14,6 +14,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Implementation of IDataProvider that load data from file.
+ * NOTE: The loaded data will remain in memory.
+ */
 public class FileBasedDataProvider implements IDataProvider {
     private List<Route> routes = new ArrayList<>();
 
@@ -52,6 +56,9 @@ public class FileBasedDataProvider implements IDataProvider {
         return routes;
     }
 
+    /**
+     * Utility class that checks if a given string is numeric.
+     */
     private static class NumericChecker {
         static boolean isNonNumeric(String s) {
             return isNonNumeric(s, 10);
@@ -70,10 +77,13 @@ public class FileBasedDataProvider implements IDataProvider {
         }
     }
 
+    /**
+     * To parse line in data file, and return Route.
+     */
     private static class LineParser {
-        public static final String SEPARATOR = " ";
+        static final String SEPARATOR = " ";
 
-        public static Route parse(String line) throws InvalidFormatException {
+        static Route parse(String line) throws InvalidFormatException {
             List<Station> stations = new ArrayList<>();
             String[] tokens = line.trim().split(SEPARATOR);
 

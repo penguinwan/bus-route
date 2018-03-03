@@ -4,9 +4,19 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.StreamSupport;
 
+/**
+ * Implementation of IRouteFinder that has simple searching algorithm.
+ * It does the search by traversing the whole dataset. It is not very efficient and only suitable to be used for small
+ * size of dataset.
+ */
 public class SimpleRouteFinder implements IRouteFinder {
     private IDataProvider dataProvider;
 
+    /**
+     * Constructor.
+     *
+     * @param dataProvider
+     */
     public SimpleRouteFinder(IDataProvider dataProvider) {
         this.dataProvider = dataProvider;
     }

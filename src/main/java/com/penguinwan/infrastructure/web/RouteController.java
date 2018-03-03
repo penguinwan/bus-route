@@ -31,7 +31,7 @@ public class RouteController {
         return ResponseEntity.ok(resourceFrom(result, departureStationId, arrivalStationId));
     }
 
-    Map resourceFrom(boolean isConnected, int departureStationId, int arrivalStationId) {
+    private Map resourceFrom(boolean isConnected, int departureStationId, int arrivalStationId) {
         HashMap<String, Object> result = new HashMap<>();
         result.put(PARAM_DEPARTURE_STATION_ID, departureStationId);
         result.put(PARAM_ARRIVAL_STATION_ID, arrivalStationId);
