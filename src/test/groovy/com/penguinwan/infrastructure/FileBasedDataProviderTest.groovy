@@ -27,6 +27,21 @@ class FileBasedDataProviderTest {
         dataProvider.iterator()[2].stations[2] == 9
     }
 
+    @Test
+    void "return empty iterator when the route data is empty"() {
+        URL url = FileBasedDataProviderTest.class.getResource('empty-data')
+        Path path = Paths.get(url.toURI())
+        FileBasedDataProvider dataProvider = new FileBasedDataProvider(path)
+        assert dataProvider.iterator().iterator().hasNext() == false
+    }
+
+    @Test(expected = InvalidFormatException.class)
+    void "error when file is empty"() {
+        URL url = FileBasedDataProviderTest.class.getResource('empty-file')
+        Path path = Paths.get(url.toURI())
+        new FileBasedDataProvider(path)
+    }
+
     @Test(expected = IllegalArgumentException.class)
     void "error when path is null"() {
         new FileBasedDataProvider(null)

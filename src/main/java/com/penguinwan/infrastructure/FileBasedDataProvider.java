@@ -58,7 +58,7 @@ public class FileBasedDataProvider implements IDataProvider {
         }
 
         private static boolean isNonNumeric(String s, int radix) {
-            if (s.isEmpty()) return true;
+            if (s == null || s.isEmpty()) return true;
             for (int i = 0; i < s.length(); i++) {
                 if (i == 0 && s.charAt(i) == '-') {
                     if (s.length() == 1) return true;
