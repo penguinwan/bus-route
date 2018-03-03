@@ -1,5 +1,6 @@
 package com.penguinwan.domain;
 
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.StreamSupport;
 
@@ -22,9 +23,9 @@ public class SimpleRouteFinder implements IRouteFinder {
                         filter(isDepartureStation.or(isArrivalStation)).
                         count() == 2;
 
-        return StreamSupport.stream(dataProvider.iterator().spliterator(), false).
-                filter(hasDepartureAndArrival).
-                count() > 0;
+        Optional<Route> result = StreamSupport.stream(dataProvider.iterator().spliterator(), true).
+                filter(hasDepartureAndArrival).findFirst();
+        return result.isPresent();
 
     }
 }
