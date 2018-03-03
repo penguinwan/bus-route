@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "api", consumes = "application/json", produces = "application/json")
+@RequestMapping(value = "api", produces = "application/json")
 public class RouteController {
 
     public static final String PARAM_DEPARTURE_STATION_ID = "dep_sid";
