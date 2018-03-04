@@ -1,19 +1,25 @@
 package com.penguinwan.domain;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+/**
+ * This class utilizes map for quicker searching.
+ * Data from dataProvider will be stored in a map.
+ */
 public class KeyValuePairRouteFinder implements IRouteFinder {
     private Map<Station, StationWithRouteId> allStation;
 
+    /**
+     * Constructor. Will read data from dataProvider and store locally.
+     *
+     * @param dataProvider
+     */
     public KeyValuePairRouteFinder(IDataProvider dataProvider) {
         Iterable<Route> dataIterator = dataProvider.iterator();
         if (!dataIterator.iterator().hasNext()) {
             allStation = new HashMap<>();
         } else {
-            allStation = combineData(dataProvider);
+            allStation = combineAllStation(dataProvider);
 
         }
     }
@@ -28,17 +34,16 @@ public class KeyValuePairRouteFinder implements IRouteFinder {
             return false;
         }
 
-        for (Integer departureStationRouteId : departureStation.routeIds) {
-            for (Integer arrivalStationRouteId : arrivalStation.routeIds) {
-                if (departureStationRouteId.equals(arrivalStationRouteId)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        Optional<Integer> commonRoute = departureStation.
+                routeIds.
+                stream().
+                filter((departureRouteId) -> arrivalStation.hasRouteId(departureRouteId)).
+                findFirst();
+        return commonRoute.isPresent();
+
     }
 
-    public Map<Station, StationWithRouteId> combineData(IDataProvider dataProvider) {
+    private Map<Station, StationWithRouteId> combineAllStation(IDataProvider dataProvider) {
         HashMap<Station, StationWithRouteId> stationMap = new HashMap();
         for (Route route : dataProvider.iterator()) {
             for (Station station : route.getStations()) {
@@ -62,6 +67,11 @@ public class KeyValuePairRouteFinder implements IRouteFinder {
 
         StationWithRouteId(Station station) {
             this.station = station;
+        }
+
+        boolean hasRouteId(int routeId) {
+            Optional<Integer> result = routeIds.stream().filter((each) -> each == routeId).findFirst();
+            return result.isPresent();
         }
     }
 }
