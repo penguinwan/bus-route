@@ -12,4 +12,13 @@ public class InvalidFileException extends Exception {
     public InvalidFileException(String message) {
         super(message);
     }
+
+    /**
+     * Constructor.
+     *
+     * @param message
+     */
+    public InvalidFileException(String message, Throwable error) {
+        super(message, error);
+    }
 }

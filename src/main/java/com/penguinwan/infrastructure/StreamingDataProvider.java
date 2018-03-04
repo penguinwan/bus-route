@@ -56,7 +56,7 @@ public class StreamingDataProvider implements IDataProvider {
 
 
         } catch (IOException ex) {
-            throw new InvalidFileException("Error reading data file. ");
+            throw new InvalidFileException("Error reading data file. ", ex);
         }
         this.dataFilePath = filePath;
     }

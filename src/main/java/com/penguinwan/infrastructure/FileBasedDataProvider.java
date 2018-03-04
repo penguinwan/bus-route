@@ -53,7 +53,7 @@ public class FileBasedDataProvider implements IDataProvider {
                 routes.add(route);
             }
         } catch (IOException ex) {
-            throw new InvalidFileException("Error reading data file. ");
+            throw new InvalidFileException("Error reading data file. ", ex);
         }
     }
 
