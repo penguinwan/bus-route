@@ -22,6 +22,15 @@ public class Station {
     }
 
     /**
+     * Get station id.
+     *
+     * @return
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
      * To check if the given station is the same with this station.
      *
      * @param station
