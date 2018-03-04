@@ -22,25 +22,25 @@ public class Application {
     @Value("${data.file}")
     private String dataFileLocation;
 
-    @Bean
+    //@Bean
     public IRouteFinder keyValuePairRouteFinder(IDataProvider dataProvider) {
         return new KeyValuePairRouteFinder(dataProvider);
     }
 
-    @Bean
+    //@Bean
     public IDataProvider streamingDataProvider()
             throws InvalidFormatException, InvalidFileException {
         Path dataFilePath = Paths.get(dataFileLocation);
         return new StreamingDataProvider(dataFilePath);
     }
 
-    //@Bean
+    @Bean
     public IRouteFinder simpleRouteFinder(IDataProvider dataProvider) {
         return new SimpleRouteFinder(dataProvider);
     }
 
 
-    //@Bean
+    @Bean
     public IDataProvider fileBasedDataProvider()
             throws InvalidFormatException, InvalidFileException {
         Path dataFilePath = Paths.get(dataFileLocation);
