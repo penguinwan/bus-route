@@ -20,6 +20,13 @@ import java.util.List;
 public class FileBasedDataProvider implements IDataProvider {
     private List<Route> routes = new ArrayList<>();
 
+    /**
+     * Constructor.
+     *
+     * @param filePath path to the data file
+     * @throws InvalidFileException   when the file is invalid, eg: file not found, error reading file
+     * @throws InvalidFormatException when the file content is invalid, eg: non-numeric is found.
+     */
     public FileBasedDataProvider(Path filePath) throws InvalidFileException, InvalidFormatException {
         if (filePath == null) {
             throw new IllegalArgumentException("File path cannot be null.");

@@ -13,17 +13,17 @@ class FileBasedDataProviderTest {
         FileBasedDataProvider dataProvider = new FileBasedDataProvider(path)
 
         dataProvider.iterator()[0].id == 1
-        dataProvider.iterator()[0].stations[0] == 1
-        dataProvider.iterator()[0].stations[1] == 2
-        dataProvider.iterator()[0].stations[2] == 3
+        dataProvider.iterator()[0].stations[0].id == 1
+        dataProvider.iterator()[0].stations[1].id == 2
+        dataProvider.iterator()[0].stations[2].id == 3
         dataProvider.iterator()[1].id == 2
-        dataProvider.iterator()[1].stations[0] == 4
-        dataProvider.iterator()[1].stations[1] == 5
-        dataProvider.iterator()[1].stations[2] == 6
+        dataProvider.iterator()[1].stations[0].id == 4
+        dataProvider.iterator()[1].stations[1].id == 5
+        dataProvider.iterator()[1].stations[2].id == 6
         dataProvider.iterator()[2].id == 3
-        dataProvider.iterator()[2].stations[0] == 7
-        dataProvider.iterator()[2].stations[1] == 8
-        dataProvider.iterator()[2].stations[2] == 9
+        dataProvider.iterator()[2].stations[0].id == 7
+        dataProvider.iterator()[2].stations[1].id == 8
+        dataProvider.iterator()[2].stations[2].id == 9
     }
 
     @Test
