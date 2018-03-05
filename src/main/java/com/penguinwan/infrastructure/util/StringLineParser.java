@@ -19,6 +19,12 @@ public final class StringLineParser {
     public static final String SEPARATOR = " ";
 
     /**
+     * Nobody can instantiate this class.
+     */
+    private StringLineParser() {
+    }
+
+    /**
      * Parse the data file line to become Route.
      *
      * @param line

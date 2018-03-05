@@ -6,6 +6,12 @@ package com.penguinwan.infrastructure.util;
  */
 public final class NumericChecker {
     /**
+     * Nobody can instantiate this class.
+     */
+    private NumericChecker() {
+    }
+
+    /**
      * return true if given string is numeric, false if given string is not numeric
      *
      * @param s
